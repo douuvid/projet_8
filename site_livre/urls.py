@@ -18,12 +18,15 @@ from django.urls import path
 from site_livre.views.logging import ca_c_la_vue
 from site_livre.views.not_found import page_404
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from site_livre.views.summary import summary
 
 urlpatterns = [
     # première page, pas de connexion 
-    path('super/', ca_c_la_vue),
+    path('inscription/', ca_c_la_vue),
     path('admin/', admin.site.urls),
-    path('', page_404)
+    path('', page_404),
+    path('sommaire/', summary),
+    
 ]
 
 urlpatterns += staticfiles_urlpatterns()
