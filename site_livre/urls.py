@@ -20,16 +20,31 @@ from site_livre.views.not_found import page_404
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from site_livre.views.summary import summary
 from site_livre.views.creer_ticket import creer_ticket
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
 
 urlpatterns = [
     # première page, pas de connexion 
     path('summary/', summary),# 1/10s
     path('inscription/', inscription),# 2/10
     path('admin/', admin.site.urls),
-    path('cree_un_ticket/', creer_ticket),
+    path('cree_un_ticket/', creer_ticket),#5/10
     path('', page_404),
     
     
 ]
 
 urlpatterns += staticfiles_urlpatterns()
+
+# Fonction pour l'inscription 
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')  # Rediriger vers la page d'accueil après l'inscription réussie
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})
+
