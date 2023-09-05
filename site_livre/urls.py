@@ -15,17 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from site_livre.views.logging import ca_c_la_vue
+from site_livre.views.logging import inscription
 from site_livre.views.not_found import page_404
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from site_livre.views.summary import summary
+from site_livre.views.creer_ticket import creer_ticket
 
 urlpatterns = [
     # première page, pas de connexion 
-    path('inscription/', ca_c_la_vue),
+    path('summary/', summary),# 1/10s
+    path('inscription/', inscription),# 2/10
     path('admin/', admin.site.urls),
+    path('cree_un_ticket/', creer_ticket),
     path('', page_404),
-    path('sommaire/', summary),
+    
     
 ]
 
