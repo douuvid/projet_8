@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'authentification',
+    'allauth_2fa',
+    'django_otp',
+    'django_otp.plugins.otp_static'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth_2fa.middleware.AllauthTwoFactorMiddleware',
+
 ]
 
 ROOT_URLCONF = 'site_livre.urls'
@@ -125,3 +131,6 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'site_livre', 'static')]
 
+AUTH_USER_MODEL = "authentification.User"
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'authentification.User'

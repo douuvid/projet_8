@@ -1,50 +1,35 @@
-"""site_livre URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from site_livre.views.logging import inscription
-from site_livre.views.not_found import page_404
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from site_livre.views.summary import summary
 from site_livre.views.creer_ticket import creer_ticket
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth import views as auth_views
+from django.urls import path
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
-    # première page, pas de connexion 
-    path('summary/', summary),# 1/10s
-    path('inscription/', inscription),# 2/10
-    path('admin/', admin.site.urls),
-    path('cree_un_ticket/', creer_ticket),#5/10
-    path('', page_404),
-    
-    
+    path('summary/', summary, name='summary'),
+    path('', summary, name='home'),
+
+    path('inscription/', inscription, name='inscription'),
+    path('admin/', admin.site.urls, name='admin'),
+    path('create_ticket/', creer_ticket, name='create_ticket'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('account/', include('allauth_2fa.urls')),
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('password_change/', auth_views.PasswordChangeView.as_view(), name='password_change'),
+    path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done')
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()
-
-# Fonction pour l'inscription 
-
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')  # Rediriger vers la page d'accueil après l'inscription réussie
-    else:
-        form = UserCreationForm()
-    return render(request, 'registration/register.html', {'form': form})
-
