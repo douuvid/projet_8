@@ -1,19 +1,29 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from django.contrib import messages
+from .form import CustomUserCreationForm
+
+from django.shortcuts import render
+from .models import Book
 
 
 
 # Create your views here.
 def register(request):
     if request.method == 'POST':
-        messsage = ''
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('sommaire')  # Rediriger vers la page d'accueil après l'inscription réussie
+            messages.success(request, 'Inscription réussie ! Vous pouvez maintenant vous connecter.')
+            return redirect('sommaire')
+        else:
+            messages.error(request, 'Il y a eu une erreur avec votre inscription.')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
 
+
+def book_list(request):
+    books = Book.objects.all()
+    return render(request, 'authentification/book_list.html', {'books': books})
