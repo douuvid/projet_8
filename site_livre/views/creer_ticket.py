@@ -5,6 +5,6 @@ from django.contrib import messages
 
 
 def creer_ticket(request):
-    #if 
+    #si le ticket a ete fait Ticket reussit  
     messages.success(request,"Ticket reussit !")
     return render(request, 'creer_ticket.html')

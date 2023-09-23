@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 
-
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -15,7 +14,6 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-
         return self.create_user(email, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -35,34 +33,31 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 
+# class Book(models.Model):
+#     title = models.CharField(max_length=255)
+#     author = models.CharField(max_length=255)
+#     summary = models.TextField()
+#     publication_date = models.DateField()
+#     image = models.ImageField(upload_to='books/', blank=True, null=True)
 
-# Vos modèles CustomUserManager et User restent ici...
+#     def __str__(self):
+#         return self.title
 
-class Book(models.Model):
-    title = models.CharField(max_length=255)
-    author = models.CharField(max_length=255)
-    summary = models.TextField()
-    publication_date = models.DateField()
-    image = models.ImageField(upload_to='books/', blank=True, null=True)
+# class Review(models.Model):
+#     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='reviews')
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
+#     content = models.TextField()
+#     rating = models.PositiveSmallIntegerField()
+#     date_posted = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.title
+#     def __str__(self):
+#         return f"Review for {self.book.title} by {self.user.email}"
 
-class Review(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.TextField()
-    rating = models.PositiveSmallIntegerField()
-    date_posted = models.DateTimeField(auto_now_add=True)
+# class ReviewRequest(models.Model):
+#     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='review_requests')
+#     user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='review_requests')
+#     message = models.TextField()
+#     date_requested = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"Review for {self.book.title} by {self.user.email}"
-
-class ReviewRequest(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='review_requests')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.TextField()
-    date_requested = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Review request for {self.book.title} by {self.user.email}"
+#     def __str__(self):
+#         return f"Review request for {self.book.title} by {self.user.email}"

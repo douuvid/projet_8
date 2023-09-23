@@ -4,11 +4,11 @@ from django.contrib import messages
 from .form import CustomUserCreationForm
 
 from django.shortcuts import render
-from .models import Book
+from .models_extra import Book
 
 
 
-# Create your views here.
+
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
