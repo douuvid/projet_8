@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'authentification',
     'allauth_2fa',
     'django_otp',
-    'django_otp.plugins.otp_static'
+    'django_otp.plugins.otp_static',
+    'site_livre',
 ]
 
 MIDDLEWARE = [
