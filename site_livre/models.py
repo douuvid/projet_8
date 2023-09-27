@@ -1,4 +1,4 @@
-from .models import User
+from authentification.models import User
 
 
 from django.db import models

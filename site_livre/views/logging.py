@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
+
 def inscription(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -13,7 +14,7 @@ def inscription(request):
             messages.error(request, 'Erreur lors de l\'inscription. Veuillez vérifier les informations fournies.')
     else:
         form = UserCreationForm()
-    return render(request, 'logging_template.html', {'form': form})
+    return render(request, 'registration/logging_template.html', {'form': form})
 
 
 

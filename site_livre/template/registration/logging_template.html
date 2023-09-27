@@ -1,0 +1,75 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/logging.css' %}">
+<div class="Desktop1" style="width: 100%; height: 100%; position: relative; background: white">
+
+{% if messages %}
+    <ul class="messages" style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); list-style: none; text-align: center; width: 100%;">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+    <div class="Rectangle9"
+        style="width: 634px; height: 460px; left: 309px; top: 100px; position: absolute; background: #FCFCFC; border: 1px black solid">
+    </div>
+
+    <div class="Rectangle8"
+        style="width: 634px; height: 71px; left: 309px; top: 62px; position: absolute; background: white; border: 1px black solid">
+    </div>
+
+    <div class="InscrivezVous"
+        style="width: 331px; height: 95px; left: 457px; top: 172px; position: absolute; text-align: center; color: #121111; font-size: 24px; font-family: Inter; font-weight: 700; line-height: 30px; word-wrap: break-word">
+        Inscrivez-vous qscqs 
+    </div>
+
+  
+
+        <input type="text" name="username" placeholder="Nom d’utilisateur" 
+               style="width: 216px; height: 40px; left: 504px; top: 261px; position: absolute; text-align: center; color: black; font-size: 16px; font-family: Inter; font-weight: 400; line-height: 22px; word-wrap: break-word">
+
+        <input type="password" id="password" name="password" placeholder="Mot de passe"
+               style="width: 301px; height: 44px; left: 485px; top: 338px; position: absolute; text-align: center; background: #D9D9D9; border: 0.50px black solid">
+        
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirmer mot de passe"
+               style="width: 301px; height: 44px; left: 486px; top: 410px; position: absolute; text-align: center; background: #D9D9D9; border: 0.50px black solid">
+        
+        <button type="submit" class="SInscrire"
+            style="width: 80px; height: 27px; left: 828px; top: 508px; position: absolute; text-align: center; color: black; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">
+            S'inscrire
+        </button>
+    
+
+    <div class="Litreview"
+        style="width: 260px; height: 30px; left: 503px; top: 83px; position: absolute; text-align: center; color: black; font-size: 24px; font-family: Inter; font-weight: 700; line-height: 30px; word-wrap: break-word">
+        LITReview
+    </div>
+
+    <a href="{% url 'home' %}" style="text-decoration: none;">
+        <div class="Retourner"
+            style="width: 83px; height: 27px; left: 705px; top: 508px; position: absolute; text-align: center; color: black; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word; cursor: pointer;">
+            Retourner
+        </div>
+    </a>
+</div>
+
+
+  <!-- Creer une methode pour declencher l'action 
+        from django.contrib.auth import authenticate, login
+
+
+def my_view(request):
+    username = request.POST["username"]
+    password = request.POST["password"]
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        # Redirect to a success page.
+        ...
+    else:
+        # Return an 'invalid login' error message.
+        ...
+
+    
+    -->

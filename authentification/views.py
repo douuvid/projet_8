@@ -4,7 +4,7 @@ from django.contrib import messages
 from .form import CustomUserCreationForm
 
 from django.shortcuts import render
-from .models_extra import Book
+from site_livre.models import Book
 
 
 

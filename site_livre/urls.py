@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.urls import include, path
-from site_livre.views.logging import inscription
-from site_livre.views.summary import summary
-from site_livre.views.creer_ticket import creer_ticket
+from .views.logging import inscription
+from .views.summary import summary
+from .views.creer_ticket import creer_ticket
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView, PasswordChangeView, PasswordChangeDoneView
-
+from django.contrib.auth.views import (LoginView, LogoutView, PasswordResetView, 
+                                       PasswordResetDoneView, PasswordResetConfirmView, 
+                                       PasswordResetCompleteView, PasswordChangeView, 
+                                       PasswordChangeDoneView)
 from authentification.views import book_list
 
 
@@ -15,13 +17,13 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
 
     # Pages principales
-    path('', summary, name='home'),
+    path('', LoginView.as_view(template_name='registration/logging_template.html'), name='home'),
     path('summary/', summary, name='summary'),
     path('inscription/', inscription, name='inscription'),
     path('create_ticket/', creer_ticket, name='create_ticket'),
 
     # Authentification
-    path('login/', LoginView.as_view(), name='login'),
+    path('login/', LoginView.as_view(template_name='registration/logging_template.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
 
     # Gestion des mots de passe
@@ -35,6 +37,10 @@ urlpatterns = [
     # Autres
     path('account/', include('allauth_2fa.urls')),
     path('books/', book_list, name='book_list'),
+    path('auth/', include('authentification.urls')),
+
+    # Supprimez cette ligne car il n'y a pas de module 'site_livre.urls'
+    # path('', include('site_livre.urls', namespace='site_livre')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
