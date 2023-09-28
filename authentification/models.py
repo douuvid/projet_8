@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
-
+from django.db import models
+from django.contrib.auth import get_user_model
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -31,6 +32,18 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+    
+
+
+class Billet(models.Model):
+    titre = models.CharField(max_length=200)
+    contenu = models.TextField()
+    date_creation = models.DateTimeField(auto_now_add=True)
+    auteur = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.titre
+
 
 
 # class Book(models.Model):

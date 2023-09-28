@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'site_livre',
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -55,8 +56,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth_2fa.middleware.AllauthTwoFactorMiddleware',
-
 ]
+
 
 ROOT_URLCONF = 'site_livre.urls'
 

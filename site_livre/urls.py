@@ -10,6 +10,8 @@ from django.contrib.auth.views import (LoginView, LogoutView, PasswordResetView,
                                        PasswordChangeDoneView)
 from authentification.views import book_list
 
+from django.urls import path
+from . import views
 
 
 urlpatterns = [
@@ -20,7 +22,7 @@ urlpatterns = [
     path('', LoginView.as_view(template_name='registration/logging_template.html'), name='home'),
     path('summary/', summary, name='summary'),
     path('inscription/', inscription, name='inscription'),
-    path('create_ticket/', creer_ticket, name='create_ticket'),
+    path('creer-ticket/', creer_ticket, name='creer_ticket'),
 
     # Authentification
     path('login/', LoginView.as_view(template_name='registration/logging_template.html'), name='login'),
@@ -38,6 +40,8 @@ urlpatterns = [
     path('account/', include('allauth_2fa.urls')),
     path('books/', book_list, name='book_list'),
     path('auth/', include('authentification.urls')),
+    
+    
 
     # Supprimez cette ligne car il n'y a pas de module 'site_livre.urls'
     # path('', include('site_livre.urls', namespace='site_livre')),
