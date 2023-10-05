@@ -1,16 +1,8 @@
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from .form import CustomUserCreationForm
-
-
+from .form import CustomUserCreationForm, BilletForm
 from site_livre.models import Book
 from .models import Billet
-from .form import BilletForm
-
-
-
-
 
 def register(request):
     if request.method == 'POST':
@@ -21,18 +13,13 @@ def register(request):
             return redirect('sommaire')
         else:
             messages.error(request, 'Il y a eu une erreur avec votre inscription: ' + ', '.join(form.errors))
-
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
-
-
 def book_list(request):
     books = Book.objects.all()
     return render(request, 'authentification/book_list.html', {'books': books})
-
-
 
 def ajouter_billet(request):
     if request.method == "POST":
@@ -46,8 +33,5 @@ def ajouter_billet(request):
         form = BilletForm()
     return render(request, 'ajouter_billet.html', {'form': form})
 
-
-# site_livre/views.py
-def ajouter_billet(request):
-    # Votre logique de vue ici
-    pass
+def home(request):
+    return render(request, 'acceuil.html')

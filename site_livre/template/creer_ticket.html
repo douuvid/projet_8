@@ -1,6 +1,3 @@
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/creer_ticket.css' %}">
-
 <!-- For more settings use the AutoHTML plugin tab ... --> 
 <div class="desktop-1" >
     <div class="rectangle-5" >
@@ -9,16 +6,19 @@
     </div>
     <div class="rectangle-8" >
     </div>
-    <div class="creer-un-ticket" >
-Creer un ticket  </div>
+    <div class="creer-une-critique" >
+Creer une critique  </div>
     <div class="image" >
 Image </div>
-    <div class="rectangle-10" >
-    </div>
-    <div class="rectangle-20" >
-    </div>
-    <div class="nom-d-utilisateur" >
-Nom d’utilisateur  </div>
+
+<div class="rectangle-10">
+    <textarea placeholder="Écrivez ici..."></textarea>
+</div>
+<div class="rectangle-20">
+    <textarea placeholder="Écrivez ici..."></textarea>
+</div>
+    <div class="description" >
+Description </div>
     <div class="titre" >
 Titre  </div>
     <div class="lit-review" >
@@ -47,4 +47,10 @@ Se deconnnecter </div>
     </div>
     <div class="telecharger-fichier" >
 Telecharger fichier </div>
+<!-- Pour télécharger fichier -->
+<div class="telecharger-fichier">
+    <input type="file" name="monfichier" id="monfichier">
+    <label for="monfichier">Télécharger fichier</label>
+</div>
+
 </div>
